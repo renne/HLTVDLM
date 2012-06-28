@@ -53,22 +53,35 @@ class HomeLoadTV {
     private $password = null;
 
     /**
-     * Prefix of HomeLoadTV API-URI.
+     * Prefix of HomeLoadTV API-URL.
      * @var string  $APIuriPrefix
      */
     private static $APIuriPrefix = 'http://www.homeloadtv.com/api/?';
 
     /**
-     * Prefix of thumbnail URL
+     * Prefix of thumbnail-URLs.
      * @var string  $ThumbUriPrefix
      */
     private static $ThumbUriPrefix = 'http://thumbs.onlinetvrecorder.com/';
 
     /**
-     * Suffix of thumbnail URL
-     * @var string  $ThumbUriSuffix
+     * Associative array with suffixes of thumbnail-URLs.
+     * @var array   $ThumbUriSuffix
      */
-    private static $ThumbUriSuffix = '____A.jpg';
+    private static $ThumbUriSuffix = array(
+        'A' => '____A.jpg',
+        'B' => '____B.jpg',
+        '0' => '____0.jpg',
+        '1' => '____1.jpg',
+        '2' => '____2.jpg',
+        '3' => '____3.jpg',
+        '4' => '____4.jpg',
+        '5' => '____5.jpg',
+        '6' => '____6.jpg',
+        '7' => '____7.jpg',
+        '8' => '____8.jpg',
+        '9' => '____9.jpg',
+    );
 
     /**
      * PHP-cURL-object.
@@ -363,14 +376,20 @@ class HomeLoadTV {
                 $state = (0 == $video['errno']) ? 'finished' : 'new';
                 $this->setState($link['id'], $state, intval(filesize($video['filepath']) / 1024), intval($video['speed_download']), $video['error'], basename($video['filepath']));
 
-                // Download thumbnail
+                // Download thumbnails
                 if ((0 == $video['errno']) && !empty($filename) && isset($rec['name'])) {
-                    $thumb = $this->curl->downloadFile(self::$ThumbUriPrefix . $rec['name'] . self::$ThumbUriSuffix, $directory, $filename . '.jpg', 0660);
 
-                    // Handle errors
-                    if (0 != $thumb['errno']) {
-                        $errors['thumb'] = $thumb;
-                        print_r($thumb);
+                    // Loop through thumbnails
+                    foreach (self::$ThumbUriSuffix as $key => $suffix) {
+
+                        // Download thumbnail
+                        $thumb = $this->curl->downloadFile(self::$ThumbUriPrefix . $rec['name'] . $suffix, $directory, $filename . $suffix, 0660);
+
+                        // Handle errors
+                        if (0 != $thumb['errno']) {
+                            $errors['thumb'][$key] = $thumb;
+                            print_r($thumb);
+                        }
                     }
                 }
 
