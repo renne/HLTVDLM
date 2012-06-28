@@ -2,7 +2,7 @@
 
 /**
  * The class CURL downloads a given HTTP-URL into given directory.
- * 
+ *
  * The class supports
  * - HTTP-503-queues
  * - resuming downloads
@@ -51,7 +51,8 @@ class CURL {
      * @return  integer             Length of header in byte.
      * @pre     None.
      * @post    None.
-     * @todo    Throw exception if filesize > PHP_INT_MAX
+     * @todo    Throw exception if Content-Length > PHP_INT_MAX.
+     * @todo    Make sure header is parsed as ISO-8859-1 charset.
      */
     private function getHeader($con, $header) {
 
@@ -100,6 +101,7 @@ class CURL {
      * @post    None.
      * @throws  Exception
      * @todo    32-bit PHP can only handle a maximum filesize of 2 GByte.
+     * @todo    Escape/normalize filename.
      */
     public function downloadFile($url, $directory, $filename = '', $mode = 0644) {
 
