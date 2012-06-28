@@ -51,10 +51,15 @@ class CURL {
      * @return  integer             Length of header in byte.
      * @pre     None.
      * @post    None.
-     * @todo    Throw exception if Content-Length > PHP_INT_MAX.
-     * @todo    Make sure header is parsed as ISO-8859-1 charset.
      */
     private function getHeader($con, $header) {
+
+        // Check if content length does not exceed maximum size for integer
+        $content_length = preg_replace('/.*Content-Length: *(\d+).*/s', '$1', $this->header);
+        if($content_length > PHP_INT_MAX) {
+            throw new Exception(get_class() . '::' . __FUNCTION__ . ': '.$content_length.' bytes content-length is too big for '.(PHP_INT_SIZE*8).' bit-PHP !!!');
+        }
+        unset($content_length);
 
         // Add header line to object variable
         $this->header .= $header;
@@ -100,7 +105,6 @@ class CURL {
      * @pre     None.
      * @post    None.
      * @throws  Exception
-     * @todo    32-bit PHP can only handle a maximum filesize of 2 GByte.
      * @todo    Escape/normalize filename.
      */
     public function downloadFile($url, $directory, $filename = '', $mode = 0644) {
@@ -164,7 +168,7 @@ class CURL {
                     // Do not write to file if HTTP status code >= 400
                     CURLOPT_FAILONERROR => true,
                     // Resume position of existing file
-                    CURLOPT_RESUME_FROM => ftell($this->fd),
+                    CURLOPT_RESUME_FROM => filesize($result['filepath']),
                     // Follow redirects
                     CURLOPT_FOLLOWLOCATION => true,
                     // Set callback function for parsing headers
@@ -182,7 +186,7 @@ class CURL {
             $this->header = '';
 
             // Execute query
-            if (!curl_exec($con)) {
+            if (!@curl_exec($con)) {
                 throw new Exception(get_class() . '::' . __FUNCTION__ . ': Executing cURL failed!');
                 @fclose($this->fd);
                 return FALSE;
