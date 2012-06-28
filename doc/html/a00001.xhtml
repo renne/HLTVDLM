@@ -202,11 +202,9 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000002">Todo:</a></b></dt><dd><p class="startdd">32-bit PHP can only handle a maximum filesize of 2 GByte. </p>
-<p class="enddd">Escape/normalize filename. </p>
-</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000001">Todo:</a></b></dt><dd>Escape/normalize filename. </dd></dl>
 
-<p>Definition at line <a class="el" href="a00003_source.xhtml#l00106">106</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
+<p>Definition at line <a class="el" href="a00003_source.xhtml#l00110">110</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
 
 <p>References <a class="el" href="a00004_source.xhtml#l00019">$directory</a>.</p>
 <div class="fragment"><pre class="fragment">                                                                                 {
@@ -270,7 +268,7 @@ Private Attributes</h2></td></tr>
                     <span class="comment">// Do not write to file if HTTP status code &gt;= 400</span>
                     CURLOPT_FAILONERROR =&gt; <span class="keyword">true</span>,
                     <span class="comment">// Resume position of existing file</span>
-                    CURLOPT_RESUME_FROM =&gt; ftell($this-&gt;fd),
+                    CURLOPT_RESUME_FROM =&gt; filesize($result[<span class="stringliteral">&#39;filepath&#39;</span>]),
                     <span class="comment">// Follow redirects</span>
                     CURLOPT_FOLLOWLOCATION =&gt; <span class="keyword">true</span>,
                     <span class="comment">// Set callback function for parsing headers</span>
@@ -288,7 +286,7 @@ Private Attributes</h2></td></tr>
             $this-&gt;header = <span class="stringliteral">&#39;&#39;</span>;
 
             <span class="comment">// Execute query</span>
-            <span class="keywordflow">if</span> (!curl_exec($con)) {
+            <span class="keywordflow">if</span> (!@curl_exec($con)) {
                 <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(get_class() . <span class="stringliteral">&#39;::&#39;</span> . __FUNCTION__ . <span class="stringliteral">&#39;: Executing cURL failed!&#39;</span>);
                 @fclose($this-&gt;fd);
                 <span class="keywordflow">return</span> FALSE;
@@ -378,14 +376,18 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>integer Length of header in byte. </dd></dl>
 <dl class="pre"><dt><b>Precondition:</b></dt><dd>None. </dd></dl>
 <dl class="post"><dt><b>Postcondition:</b></dt><dd>None. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000001">Todo:</a></b></dt><dd><p class="startdd">Throw exception if Content-Length &gt; PHP_INT_MAX. </p>
-<p class="enddd">Make sure header is parsed as ISO-8859-1 charset. </p>
-</dd></dl>
 
-<p>Definition at line <a class="el" href="a00003_source.xhtml#l00057">57</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
+<p>Definition at line <a class="el" href="a00003_source.xhtml#l00055">55</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
 
 <p>References <a class="el" href="a00003_source.xhtml#l00029">$header</a>.</p>
 <div class="fragment"><pre class="fragment">                                              {
+
+        <span class="comment">// Check if content length does not exceed maximum size for integer</span>
+        $content_length = preg_replace(<span class="stringliteral">&#39;/.*Content-Length: *(\d+).*/s&#39;</span>, <span class="stringliteral">&#39;$1&#39;</span>, $this-&gt;header);
+        <span class="keywordflow">if</span>($content_length &gt; PHP_INT_MAX) {
+            <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(get_class() . <span class="stringliteral">&#39;::&#39;</span> . __FUNCTION__ . <span class="stringliteral">&#39;: &#39;</span>.$content_length.<span class="stringliteral">&#39; bytes content-length is too big for &#39;</span>.(PHP_INT_SIZE*8).<span class="stringliteral">&#39; bit-PHP !!!&#39;</span>);
+        }
+        unset($content_length);
 
         <span class="comment">// Add header line to object variable</span>
         $this-&gt;header .= <a class="code" href="a00001.xhtml#a9e29f76fc3f1b384198ab34b4fa69380">$header</a>;
@@ -427,7 +429,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="a00003_source.xhtml#l00029">29</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
 
-<p>Referenced by <a class="el" href="a00003_source.xhtml#l00057">getHeader()</a>.</p>
+<p>Referenced by <a class="el" href="a00003_source.xhtml#l00055">getHeader()</a>.</p>
 
 </div>
 </div>
@@ -454,7 +456,7 @@ Private Attributes</h2></td></tr>
     <ul>
       <li class="navelem"><a class="el" href="a00001.xhtml">CURL</a>      </li>
 
-    <li class="footer">Generated on Thu Jun 28 2012 14:47:14 for HLTVDLM by
+    <li class="footer">Generated on Thu Jun 28 2012 22:04:15 for HLTVDLM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
