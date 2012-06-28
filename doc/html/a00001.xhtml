@@ -202,9 +202,11 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000002">Todo:</a></b></dt><dd>32-bit PHP can only handle a maximum filesize of 2 GByte. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000002">Todo:</a></b></dt><dd><p class="startdd">32-bit PHP can only handle a maximum filesize of 2 GByte. </p>
+<p class="enddd">Escape/normalize filename. </p>
+</dd></dl>
 
-<p>Definition at line <a class="el" href="a00003_source.xhtml#l00104">104</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
+<p>Definition at line <a class="el" href="a00003_source.xhtml#l00106">106</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
 
 <p>References <a class="el" href="a00004_source.xhtml#l00019">$directory</a>.</p>
 <div class="fragment"><pre class="fragment">                                                                                 {
@@ -376,9 +378,11 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>integer Length of header in byte. </dd></dl>
 <dl class="pre"><dt><b>Precondition:</b></dt><dd>None. </dd></dl>
 <dl class="post"><dt><b>Postcondition:</b></dt><dd>None. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000001">Todo:</a></b></dt><dd>Throw exception if filesize &gt; PHP_INT_MAX </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000001">Todo:</a></b></dt><dd><p class="startdd">Throw exception if Content-Length &gt; PHP_INT_MAX. </p>
+<p class="enddd">Make sure header is parsed as ISO-8859-1 charset. </p>
+</dd></dl>
 
-<p>Definition at line <a class="el" href="a00003_source.xhtml#l00056">56</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
+<p>Definition at line <a class="el" href="a00003_source.xhtml#l00057">57</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
 
 <p>References <a class="el" href="a00003_source.xhtml#l00029">$header</a>.</p>
 <div class="fragment"><pre class="fragment">                                              {
@@ -423,7 +427,7 @@ Private Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="a00003_source.xhtml#l00029">29</a> of file <a class="el" href="a00003_source.xhtml">CURL.php</a>.</p>
 
-<p>Referenced by <a class="el" href="a00003_source.xhtml#l00056">getHeader()</a>.</p>
+<p>Referenced by <a class="el" href="a00003_source.xhtml#l00057">getHeader()</a>.</p>
 
 </div>
 </div>
@@ -450,7 +454,7 @@ Private Attributes</h2></td></tr>
     <ul>
       <li class="navelem"><a class="el" href="a00001.xhtml">CURL</a>      </li>
 
-    <li class="footer">Generated on Wed Jun 27 2012 15:31:08 for HLTVDLM by
+    <li class="footer">Generated on Thu Jun 28 2012 14:47:14 for HLTVDLM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

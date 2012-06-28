@@ -130,7 +130,7 @@ Static Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.xhtml#a8cc25db413d0b3b45bb791123b9b799a">$lockfile</a> = 'HomeLoadTV.lock'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.xhtml#af91e7d6d3eca7da321784ba44bf0a713">$APIuriPrefix</a> = 'http://www.homeloadtv.com/api/?'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.xhtml#afc7be5f78e1d06a5c49d235e57ef4854">$ThumbUriPrefix</a> = 'http://thumbs.onlinetvrecorder.com/'</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.xhtml#a3a6a52ac9557e8c118c8179e6a5da82c">$ThumbUriSuffix</a> = '____A.jpg'</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.xhtml#a669a9cc8fe0208e3ce884358e627702a">$ThumbUriSuffix</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
@@ -179,7 +179,7 @@ Static Private Attributes</h2></td></tr>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="a00007.xhtml#_todo000003">Todo:</a></b></dt><dd>Check email string with regular expression. </dd></dl>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00091">91</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00104">104</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
 <p>References <a class="el" href="a00005_source.xhtml#l00047">$email</a>, and <a class="el" href="a00005_source.xhtml#l00053">$password</a>.</p>
 <div class="fragment"><pre class="fragment">                                                   {
@@ -230,7 +230,7 @@ Static Private Attributes</h2></td></tr>
 <dl class="pre"><dt><b>Precondition:</b></dt><dd>None. </dd></dl>
 <dl class="post"><dt><b>Postcondition:</b></dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00128">128</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00141">141</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 <div class="fragment"><pre class="fragment">                                 {
 
         <span class="comment">// Delete curl object</span>
@@ -298,9 +298,9 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00314">314</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00327">327</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
-<p>References <a class="el" href="a00004_source.xhtml#l00019">$directory</a>, <a class="el" href="a00004_source.xhtml#l00022">$emailFrom</a>, <a class="el" href="a00004_source.xhtml#l00021">$limit</a>, <a class="el" href="a00005_source.xhtml#l00161">getLinks()</a>, and <a class="el" href="a00005_source.xhtml#l00263">setState()</a>.</p>
+<p>References <a class="el" href="a00004_source.xhtml#l00019">$directory</a>, <a class="el" href="a00004_source.xhtml#l00022">$emailFrom</a>, <a class="el" href="a00004_source.xhtml#l00021">$limit</a>, <a class="el" href="a00005_source.xhtml#l00174">getLinks()</a>, and <a class="el" href="a00005_source.xhtml#l00276">setState()</a>.</p>
 <div class="fragment"><pre class="fragment">                                                                                           {
 
         <span class="comment">// Check parameters</span>
@@ -353,14 +353,20 @@ Static Private Attributes</h2></td></tr>
                 $state = (0 == $video[<span class="stringliteral">&#39;errno&#39;</span>]) ? <span class="stringliteral">&#39;finished&#39;</span> : <span class="stringliteral">&#39;new&#39;</span>;
                 $this-&gt;<a class="code" href="a00002.xhtml#a036df968051a20fee7f3f633f2ff1c97">setState</a>($link[<span class="stringliteral">&#39;id&#39;</span>], $state, intval(filesize($video[<span class="stringliteral">&#39;filepath&#39;</span>]) / 1024), intval($video[<span class="stringliteral">&#39;speed_download&#39;</span>]), $video[<span class="stringliteral">&#39;error&#39;</span>], basename($video[<span class="stringliteral">&#39;filepath&#39;</span>]));
 
-                <span class="comment">// Download thumbnail</span>
+                <span class="comment">// Download thumbnails</span>
                 <span class="keywordflow">if</span> ((0 == $video[<span class="stringliteral">&#39;errno&#39;</span>]) &amp;&amp; !empty($filename) &amp;&amp; isset($rec[<span class="stringliteral">&#39;name&#39;</span>])) {
-                    $thumb = $this-&gt;curl-&gt;downloadFile(self::$ThumbUriPrefix . $rec[<span class="stringliteral">&#39;name&#39;</span>] . self::$ThumbUriSuffix, <a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">$directory</a>, $filename . <span class="stringliteral">&#39;.jpg&#39;</span>, 0660);
 
-                    <span class="comment">// Handle errors</span>
-                    <span class="keywordflow">if</span> (0 != $thumb[<span class="stringliteral">&#39;errno&#39;</span>]) {
-                        $errors[<span class="stringliteral">&#39;thumb&#39;</span>] = $thumb;
-                        print_r($thumb);
+                    <span class="comment">// Loop through thumbnails</span>
+                    <span class="keywordflow">foreach</span> (self::$ThumbUriSuffix as $key =&gt; $suffix) {
+
+                        <span class="comment">// Download thumbnail</span>
+                        $thumb = $this-&gt;curl-&gt;downloadFile(self::$ThumbUriPrefix . $rec[<span class="stringliteral">&#39;name&#39;</span>] . $suffix, <a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">$directory</a>, $filename . $suffix, 0660);
+
+                        <span class="comment">// Handle errors</span>
+                        <span class="keywordflow">if</span> (0 != $thumb[<span class="stringliteral">&#39;errno&#39;</span>]) {
+                            $errors[<span class="stringliteral">&#39;thumb&#39;</span>][$key] = $thumb;
+                            print_r($thumb);
+                        }
                     }
                 }
 
@@ -434,11 +440,11 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00161">161</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00174">174</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
 <p>References <a class="el" href="a00004_source.xhtml#l00021">$limit</a>.</p>
 
-<p>Referenced by <a class="el" href="a00005_source.xhtml#l00314">download()</a>.</p>
+<p>Referenced by <a class="el" href="a00005_source.xhtml#l00327">download()</a>.</p>
 <div class="fragment"><pre class="fragment">                                                                                  {
 
         <span class="comment">// Check parameters</span>
@@ -535,7 +541,7 @@ Here is the caller graph for this function:</div>
 <dl class="pre"><dt><b>Precondition:</b></dt><dd>None. </dd></dl>
 <dl class="post"><dt><b>Postcondition:</b></dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00230">230</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00243">243</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 <div class="fragment"><pre class="fragment">                                         {
 
         <span class="comment">// Check parameters</span>
@@ -622,9 +628,9 @@ Here is the caller graph for this function:</div>
 <dl class="pre"><dt><b>Precondition:</b></dt><dd>None. </dd></dl>
 <dl class="post"><dt><b>Postcondition:</b></dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00263">263</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00276">276</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
-<p>Referenced by <a class="el" href="a00005_source.xhtml#l00314">download()</a>.</p>
+<p>Referenced by <a class="el" href="a00005_source.xhtml#l00327">download()</a>.</p>
 <div class="fragment"><pre class="fragment">                                                                                                  {
 
         <span class="comment">// Check parameters</span>
@@ -686,7 +692,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Prefix of <a class="el" href="a00002.xhtml">HomeLoadTV</a> API-URI. </p>
+<p>Prefix of <a class="el" href="a00002.xhtml">HomeLoadTV</a> API-URL. </p>
 
 <p>Definition at line <a class="el" href="a00005_source.xhtml#l00059">59</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
@@ -704,7 +710,7 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <p>PHP-cURL-object. </p>
 
-<p>Definition at line <a class="el" href="a00005_source.xhtml#l00077">77</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
+<p>Definition at line <a class="el" href="a00005_source.xhtml#l00090">90</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
 </div>
 </div>
@@ -722,7 +728,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="a00005_source.xhtml#l00047">47</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
-<p>Referenced by <a class="el" href="a00005_source.xhtml#l00091">__construct()</a>.</p>
+<p>Referenced by <a class="el" href="a00005_source.xhtml#l00104">__construct()</a>.</p>
 
 </div>
 </div>
@@ -772,7 +778,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="a00005_source.xhtml#l00053">53</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
-<p>Referenced by <a class="el" href="a00005_source.xhtml#l00091">__construct()</a>.</p>
+<p>Referenced by <a class="el" href="a00005_source.xhtml#l00104">__construct()</a>.</p>
 
 </div>
 </div>
@@ -786,23 +792,37 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Prefix of thumbnail URL </p>
+<p>Prefix of thumbnail-URLs. </p>
 
 <p>Definition at line <a class="el" href="a00005_source.xhtml#l00065">65</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3a6a52ac9557e8c118c8179e6a5da82c"></a><!-- doxytag: member="HomeLoadTV::$ThumbUriSuffix" ref="a3a6a52ac9557e8c118c8179e6a5da82c" args="" -->
+<a class="anchor" id="a669a9cc8fe0208e3ce884358e627702a"></a><!-- doxytag: member="HomeLoadTV::$ThumbUriSuffix" ref="a669a9cc8fe0208e3ce884358e627702a" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string HomeLoadTV::$ThumbUriSuffix = '____A.jpg'<code> [static, private]</code></td>
+          <td class="memname">array HomeLoadTV::$ThumbUriSuffix<code> [static, private]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Suffix of thumbnail URL </p>
+<b>Initial value:</b><div class="fragment"><pre class="fragment"> array(
+        <span class="charliteral">&#39;A&#39;</span> =&gt; <span class="stringliteral">&#39;____A.jpg&#39;</span>,
+        <span class="charliteral">&#39;B&#39;</span> =&gt; <span class="stringliteral">&#39;____B.jpg&#39;</span>,
+        <span class="charliteral">&#39;0&#39;</span> =&gt; <span class="stringliteral">&#39;____0.jpg&#39;</span>,
+        <span class="charliteral">&#39;1&#39;</span> =&gt; <span class="stringliteral">&#39;____1.jpg&#39;</span>,
+        <span class="charliteral">&#39;2&#39;</span> =&gt; <span class="stringliteral">&#39;____2.jpg&#39;</span>,
+        <span class="charliteral">&#39;3&#39;</span> =&gt; <span class="stringliteral">&#39;____3.jpg&#39;</span>,
+        <span class="charliteral">&#39;4&#39;</span> =&gt; <span class="stringliteral">&#39;____4.jpg&#39;</span>,
+        <span class="charliteral">&#39;5&#39;</span> =&gt; <span class="stringliteral">&#39;____5.jpg&#39;</span>,
+        <span class="charliteral">&#39;6&#39;</span> =&gt; <span class="stringliteral">&#39;____6.jpg&#39;</span>,
+        <span class="charliteral">&#39;7&#39;</span> =&gt; <span class="stringliteral">&#39;____7.jpg&#39;</span>,
+        <span class="charliteral">&#39;8&#39;</span> =&gt; <span class="stringliteral">&#39;____8.jpg&#39;</span>,
+        <span class="charliteral">&#39;9&#39;</span> =&gt; <span class="stringliteral">&#39;____9.jpg&#39;</span>,
+    )
+</pre></div><p>Associative array with suffixes of thumbnail-URLs. </p>
 
 <p>Definition at line <a class="el" href="a00005_source.xhtml#l00071">71</a> of file <a class="el" href="a00005_source.xhtml">HomeLoadTV.php</a>.</p>
 
@@ -831,7 +851,7 @@ Here is the caller graph for this function:</div>
     <ul>
       <li class="navelem"><a class="el" href="a00002.xhtml">HomeLoadTV</a>      </li>
 
-    <li class="footer">Generated on Wed Jun 27 2012 15:31:08 for HLTVDLM by
+    <li class="footer">Generated on Thu Jun 28 2012 14:47:14 for HLTVDLM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

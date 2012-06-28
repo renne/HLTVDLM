@@ -95,9 +95,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt><a class="anchor" id="_todo000002"></a>Global <a class="el" href="a00001.xhtml#a1d2c997569b8a91c7a5fce8bc9ae807e">CURL</a>  ($url, $directory, $filename= '', $mode=0644)</dt>
-<dd>32-bit PHP can only handle a maximum filesize of 2 GByte.  </dd>
+<dd><p class="startdd">32-bit PHP can only handle a maximum filesize of 2 GByte. </p>
+<p class="enddd">Escape/normalize filename.  </p>
+</dd>
 <dt><a class="anchor" id="_todo000001"></a>Global <a class="el" href="a00001.xhtml#a54e318f5d04c91b8fea9573f8f9cd1c0">CURL</a>  ($con, $header)</dt>
-<dd>Throw exception if filesize &gt; PHP_INT_MAX  </dd>
+<dd><p class="startdd">Throw exception if Content-Length &gt; PHP_INT_MAX. </p>
+<p class="enddd">Make sure header is parsed as ISO-8859-1 charset.  </p>
+</dd>
 <dt><a class="anchor" id="_todo000003"></a>Global <a class="el" href="a00002.xhtml#aaaa2656ddeca0b10e9cfbdcf33af6171">HomeLoadTV</a>  ($email, $password)</dt>
 <dd>Check email string with regular expression. </dd>
 </dl>
@@ -120,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
 
-    <li class="footer">Generated on Wed Jun 27 2012 15:31:08 for HLTVDLM by
+    <li class="footer">Generated on Thu Jun 28 2012 14:47:14 for HLTVDLM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
