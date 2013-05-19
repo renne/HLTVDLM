@@ -214,14 +214,14 @@ class HomeLoadTV {
         preg_match_all('#.*(?P<url>http://.+);(?P<id>\d+);#m', $result, $links, PREG_SET_ORDER);
         foreach ($links as &$link) {
             unset($link[0], $link[1], $link[2], $link[3]);
-            $link[id] = intval($link[id]);
+            $link['id'] = intval($link['id']);
         }
 
         // Get parameters, convert values from string to integer
         // and combine keys and values
         $params = array();
         preg_match_all('#([A-Z]+)=(\d+);#m', $result, $params);
-        $params[2] = array_map(intval, $params[2]);
+        $params[2] = array_map('intval', $params[2]);
         $result = array_combine($params[1], $params[2]);
         unset($params);
 
@@ -302,7 +302,7 @@ class HomeLoadTV {
             'do=setstate',
             'uid=' . $this->email,
             'id=' . $id,
-            'state=' . $state,
+            'state=' . $state,	
             'error=' . $error,
             'filesize=' . $filesize,
             'speed=' . $speed,
@@ -320,11 +320,12 @@ class HomeLoadTV {
      * @param   boolean     $happyHour  Only download in Happy Hour
      * @param   string      $limit      Maximum number download links to get.
      * @param   string      $emailFrom  Sender address of emails with error messages.
+     * @param   boolean     $thumbnails Download thumbnails true/false.
      * @pre     None.
      * @post    None.
      * @throws  Exception
      */
-    public function download($directory, $happyHour = true, $limit = 100, $emailFrom = "") {
+    public function download($directory, $happyHour = true, $limit = 100, $emailFrom = "", $thumbnails = true) {
 
         // Check parameters
         if (!is_string($directory))
@@ -359,11 +360,11 @@ class HomeLoadTV {
 
                 // Get filename, name of recording and format if OTR recording
                 $rec = array();
-                preg_match('#.*/\d*_?(?P<filename>(?P<name>.+_TVOON_DE)\.(?P<format>.*))#', $link[url], $rec);
+                preg_match('#.*/\d*_?(?P<filename>(?P<name>.+_TVOON_DE)\.(?P<format>.*))#', $link['url'], $rec);
                 $filename = (isset($rec['filename'])) ? $rec['filename'] : '';
 
                 // Download link
-                $video = $this->curl->downloadFile($link[url], $directory, $filename, 0660);
+                $video = $this->curl->downloadFile($link['url'], $directory, $filename, 0660);
 
                 // Handle errors
                 $errors = array();
@@ -372,12 +373,12 @@ class HomeLoadTV {
                     print_r($video);
                 }
 
-                // Call HomeloadTV-API and set state.
+                // Call HomeloadTV-API and set state
                 $state = (0 == $video['errno']) ? 'finished' : 'new';
-                $this->setState($link['id'], $state, intval(filesize($video['filepath']) / 1024), intval($video['speed_download']), $video['error'], basename($video['filepath']));
+                $this->setState($link['id'], $state, intval($video['size_download'] / 1024), intval($video['speed_download'] / 1024), $video['error'], basename($video['filepath']));
 
                 // Download thumbnails
-                if ((0 == $video['errno']) && !empty($filename) && isset($rec['name'])) {
+                if ($thumbnails && (0 == $video['errno']) && !empty($filename) && isset($rec['name'])) {
 
                     // Loop through thumbnails
                     foreach (self::$ThumbUriSuffix as $key => $suffix) {
