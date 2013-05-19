@@ -35,11 +35,12 @@ class CURL {
     private $fd = null;
 
     /**
-     * The destructor makes sure the file descriptor is closed.
+     * The destructor makes sure the file descriptor is closed and unlocked.
      * @pre     None.
      * @post    None.
      */
     public function __destruct() {
+	@flock($this->fd, LOCK_UN);
         @fclose($this->fd);
     }
 
@@ -54,10 +55,10 @@ class CURL {
      */
     private function getHeader($con, $header) {
 
-        // Check if content length does not exceed maximum size for integer
+        // Check if content length does not exceed maximum file size
         $content_length = preg_replace('/.*Content-Length: *(\d+).*/s', '$1', $this->header);
         if($content_length > PHP_INT_MAX) {
-            throw new Exception(get_class() . '::' . __FUNCTION__ . ': '.$content_length.' bytes content-length is too big for '.(PHP_INT_SIZE*8).' bit-PHP !!!');
+            throw new Exception(get_class() . '::' . __FUNCTION__ . ': '.$content_length.' bytes file size is too big for '.(PHP_INT_SIZE*8).' bit-PHP !!!');
         }
         unset($content_length);
 
@@ -157,9 +158,13 @@ class CURL {
         // Initialize cURL
         if (($con = curl_init($url)) === FALSE) {
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Initalizing cURL with URL ' . $url . 'failed!');
+	    flock($this->fd, LOCK_UN);
             @fclose($this->fd);
             return FALSE;
         }
+
+	// Clear statcache for filesize()
+	clearstatcache();
 
         // Set cURL options
         if (!curl_setopt_array($con, array(
@@ -172,45 +177,61 @@ class CURL {
                     // Follow redirects
                     CURLOPT_FOLLOWLOCATION => true,
                     // Set callback function for parsing headers
-                    CURLOPT_HEADERFUNCTION => array($this, 'getHeader')
-                ))) {
-            throw new Exception(get_class() . '::' . __FUNCTION__ . ': Setting cURL options failed!');
+                    CURLOPT_HEADERFUNCTION => array($this, 'getHeader'),
+		    // Set user agent
+		    CURLOPT_USERAGENT => 'HLTVDLM 1.0 http://gitorious.org/hltvdlm',
+	))) {
+            throw new Exception(__FILE__ . ':' . __LINE__ . ' ' . get_class() . '::' . __FUNCTION__ . ' ' . curl_error($con));
+	    @flock($this->fd, LOCK_UN);
             @fclose($this->fd);
             return FALSE;
         }
 
-        // Queue loop for HTTP code 503 "Temporarily unavailable"
-        do {
+        // Download URL and loop for HTTP code 503 "Temporarily unavailable"
+        while(true) {
 
-            // Reset header information
+            // Reset HTTP header information
             $this->header = '';
 
             // Execute query
-            if (!@curl_exec($con)) {
-                throw new Exception(get_class() . '::' . __FUNCTION__ . ': Executing cURL failed!');
-                @fclose($this->fd);
-                return FALSE;
-            }
+	    $execres = @curl_exec($con);
 
             // Get info about transfer
             $result['errno'] = curl_errno($con);
             $result['error'] = curl_error($con);
             $result = @array_merge($result, curl_getinfo($con));
 
-            // Get retry time and wait if HTTP code 503
-            $retry = intval(preg_replace('/.*Retry-After: *(\d+).*/s', '$1', $this->header));
-            if ((503 === intval($result['http_code'])) && ($retry > 0)) {
-                sleep($retry);
-            }
+	    // Leave download loop on success
+	    if($execres) {
+		break;
+	    }
 
-            // End of queue loop for HTTP code 503 "Temporarily unavailable"
-        } while ((503 === intval($result['http_code'])) && ($retry > 0));
+	    // Handle HTTP code 503 "Temporarily unavailable"
+	    if(503 === intval($result['http_code'])) {
+
+		// Get retry time and wait
+                sleep(intval(preg_replace('/.*Retry-After: *(\d+).*/s', '$1', $this->header)));
+		continue;
+	    }
+
+	    // Handle exceptions
+            throw new Exception(__FILE__ . ':' . __LINE__ . ' ' . get_class() . '::' . __FUNCTION__ . ' ' . curl_error($con));
+	    @flock($this->fd, LOCK_UN);
+	    @fclose($this->fd);
+	    return FALSE;
+
+        } // While loop
 
         // Close cURL object
         @curl_close($con);
 
-        // Close file descriptor
+        // Close/unlock file descriptor
+	@flock($this->fd, LOCK_UN);
         @fclose($this->fd);
+
+	// Get current size of file
+	clearstatcache();
+	$result['size_download'] = filesize($result['filepath']);
 
         // Get filename from HTTP-header if $filename not set
         $matches = array();
