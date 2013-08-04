@@ -12,18 +12,18 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 * PHP 64-bit support for files > 2 GByte
 
 ##**Discussion**
-* [OTR-Forum](http://www.otrforum.com/showthread.php?62869-Api&p=348681#post348681) (German)
+[OTR-Forum](http://www.otrforum.com/showthread.php?62869-Api&p=348681#post348681) (German)
 
 ##**Classes**
-* _HomeLoadTV_
+_HomeLoadTV_
 
           Download-manager using the HomeloadTV-API to get a list of downloadlinks
-* _CURL_
+_CURL_
 
           PHP cURL wrapper for downloading files with HTTP-503-queuing and resume-support
 
 ##**Executable**
-* _HomeLoadTV-cron.php_
+_HomeLoadTV-cron.php_
 
           1. Runs HLTVDLM
           2. Adjust the path of the PHP-CLI executable
@@ -31,7 +31,7 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 
 
 ##**Source documentation**
-  Included in docs-directory of repository (Doxygen-XHTML)
+Included in docs-directory of repository (Doxygen-XHTML)
 
 ##**Contribute**
 <a href="https://flattr.com/submit/auto?user_id=renne&url=http://renneb.github.io/HLTVDLM&title=HLTVDLM&language=PHP&tags=github&category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%"/></a>
