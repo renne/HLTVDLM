@@ -38,6 +38,63 @@
 It can be used to e.g. download files into a private area on a shared-hosting webserver.
 <b>HLTVDLM</b> is no official <i>HomeloadTV</i>-project but a personal project! It is just for educational purposes without any warranty or liability.</p>
 
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a><strong>Requirements</strong>
+</h2>
+
+<ul>
+<li>Account at <a href="http://www.homeloadtv.com/">HomeloadTV</a>
+</li>
+<li>PHP &gt;= 5.3</li>
+<li>PHP cURL extension</li>
+<li>PHP 64-bit support for files &gt; 2 GByte</li>
+</ul><h2>
+<a name="discussion" class="anchor" href="#discussion"><span class="octicon octicon-link"></span></a><strong>Discussion</strong>
+</h2>
+
+<ul>
+<li>
+<a href="http://www.otrforum.com/showthread.php?62869-Api&amp;p=348681#post348681">OTR-Forum</a> (German)</li>
+</ul><h2>
+<a name="classes" class="anchor" href="#classes"><span class="octicon octicon-link"></span></a><strong>Classes</strong>
+</h2>
+
+<ul>
+<li>
+<p><em>HomeLoadTV</em></p>
+
+<pre><code>  Download-manager using the HomeloadTV-API to get a list of downloadlinks
+</code></pre>
+</li>
+<li>
+<p><em>CURL</em></p>
+
+<pre><code>  PHP cURL wrapper for downloading files with HTTP-503-queuing and resume-support
+</code></pre>
+</li>
+</ul><h2>
+<a name="executable" class="anchor" href="#executable"><span class="octicon octicon-link"></span></a><strong>Executable</strong>
+</h2>
+
+<ul>
+<li>
+<p><em>HomeLoadTV-cron.php</em></p>
+
+<pre><code>  1. Runs HLTVDLM
+  2. Adjust the path of the PHP-CLI executable
+  3. Set values for the variables ("$emailFrom" can be an empty string if you don't want error messages via email).
+</code></pre>
+</li>
+</ul><h2>
+<a name="source-documentation" class="anchor" href="#source-documentation"><span class="octicon octicon-link"></span></a><strong>Source documentation</strong>
+</h2>
+
+<p>Included in docs-directory of repository (Doxygen-XHTML)</p>
+
+<h2>
+<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a><strong>Contribute</strong>
+</h2>
+
 <p><a href="https://flattr.com/submit/auto?user_id=renne&amp;url=http://renneb.github.io/HLTVDLM&amp;title=HLTVDLM&amp;language=PHP&amp;tags=github&amp;category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%"></a></p>
       </section>
     </div>
