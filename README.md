@@ -10,6 +10,7 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 * PHP >= 5.3
 * PHP cURL extension
 * PHP 64-bit support for files > 2 GByte
+* Cronjob every 5 minutes
 
 ##**Discussion**
 [OTR-Forum](http://www.otrforum.com/showthread.php?62869-Api&p=348681#post348681) (German)
