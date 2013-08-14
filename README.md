@@ -1,4 +1,4 @@
-HLTVDLM
+HLTVDLM <a href="https://flattr.com/submit/auto?user_id=renne&url=http://renneb.github.io/HLTVDLM&title=HLTVDLM&language=PHP&tags=github&category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%" align="right"/></a>
 =======
 
 <b>HLTVDLM</b> is a download-manager for <a href="http://www.homeloadtv.com/" alt="HomeloadTV"><i>HomeloadTV</i></a> written in <b>PHP</b> to be used on systems which cannot run the official <i>HomeloadTV</i>-client.
@@ -11,6 +11,9 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 * PHP cURL extension
 * PHP 64-bit support for files > 2 GByte
 * Cronjob every 5 minutes
+
+##**Bugs and Feature Requests**
+https://github.com/renneb/HLTVDLM/issues
 
 ##**Discussion**
 [OTR-Forum](http://www.otrforum.com/showthread.php?62869-Api&p=348681#post348681) (German)
@@ -33,6 +36,3 @@ _HomeLoadTV-cron.php_
 
 ##**Source documentation**
 Included in docs-directory of repository (Doxygen-XHTML)
-
-##**Contribute**
-<a href="https://flattr.com/submit/auto?user_id=renne&url=http://renneb.github.io/HLTVDLM&title=HLTVDLM&language=PHP&tags=github&category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%"/></a>
