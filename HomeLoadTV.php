@@ -321,11 +321,13 @@ class HomeLoadTV {
      * @param   string      $limit      Maximum number download links to get.
      * @param   string      $emailFrom  Sender address of emails with error messages.
      * @param   boolean     $thumbnails Download thumbnails true/false.
+     * @param   boolean     $verbose    Verbose messages true/false.
+     * @return  integer                 0: Ok, 1: no new links, 2: link limit
      * @pre     None.
      * @post    None.
      * @throws  Exception
      */
-    public function download($directory, $happyHour = true, $limit = 100, $emailFrom = "", $thumbnails = true) {
+    public function download($directory, $happyHour = true, $limit = 100, $emailFrom = "", $thumbnails = true, $verbose = false) {
 
         // Check parameters
         if (!is_string($directory))
@@ -336,6 +338,8 @@ class HomeLoadTV {
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $directory must be writable!');
         if (!is_bool($happyHour))
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $happyHour must be boolean type!');
+        if (!is_bool($verbose))
+            throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $verbose must be boolean type!');
         if (!is_integer($limit))
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $limit must be integer type!');
         if ($limit <= 0)
@@ -344,6 +348,7 @@ class HomeLoadTV {
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $emailFrom must be string type!');
 
         // Get list of links
+        if ($verbose) echo "Downloading link list\n";
         $list = $this->getLinks($limit, true, $happyHour);
 
         // Check for links
@@ -355,6 +360,7 @@ class HomeLoadTV {
                 throw new Exception(get_class() . '::' . __FUNCTION__ . ': Cannot create cURL object!');
             }
 
+            if ($verbose) echo "Starting download\n";
             // Loop through links
             foreach ($list['links'] as $link) {
 
@@ -364,6 +370,7 @@ class HomeLoadTV {
                 $filename = (isset($rec['filename'])) ? $rec['filename'] : '';
 
                 // Download link
+                if ($verbose) echo $link['url'] . "\n";
                 $video = $this->curl->downloadFile($link['url'], $directory, $filename, 0660);
 
                 // Handle errors
@@ -372,9 +379,11 @@ class HomeLoadTV {
                     $errors['video'] = $video;
                     print_r($video);
                 }
+                if ($verbose) echo "Downloaded: " . intval($video['size_download'] / 1024 / 1024) . "MB\n";
 
                 // Call HomeloadTV-API and set state
                 $state = (0 == $video['errno']) ? 'finished' : 'new';
+                if ($verbose) echo "Changing state of link id " . $link['id'] . " to " . $state . "\n";
                 $this->setState($link['id'], $state, intval($video['size_download'] / 1024), intval($video['speed_download'] / 1024), $video['error'], basename($video['filepath']));
 
                 // Download thumbnails
@@ -384,6 +393,7 @@ class HomeLoadTV {
                     foreach (self::$ThumbUriSuffix as $key => $suffix) {
 
                         // Download thumbnail
+                        if ($verbose) echo self::$ThumbUriPrefix . $rec['name'] . $suffix . "\n";
                         $thumb = $this->curl->downloadFile(self::$ThumbUriPrefix . $rec['name'] . $suffix, $directory, $filename . $suffix, 0660);
 
                         // Handle errors
@@ -402,6 +412,19 @@ class HomeLoadTV {
 
             // Destroy CURL object
             unset($this->curl);
+        }
+        switch (count($list['links'])) {
+            case 0:
+                if ($verbose) echo "No new links found!\n";
+                return 1;
+                break;
+            case $limit:
+                if ($verbose) echo "Link limit of $limit reached! Remaining entries will be downloaded next time.\n";
+                return 2;
+                break;
+            default:
+                return 0;
+                break;
         }
     }
 
