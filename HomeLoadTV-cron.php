@@ -7,33 +7,56 @@
  * @name        Executable
  * @description Executable for class HomeLoadTV.
  * @author      Rene Bartsch <rene@bartschnet.de>
- * @copyright   Rene Bartsch 2012
+ * @copyright   Rene Bartsch 2013
  * @license     GNU GPL v.3
- * @link        http://gitorious.org/hltvdlm
+ * @link        https://github.com/renneb/HLTVDLM
  * @version     $Id$
  */
 
-// Configuration
-$email = 'tic@tac.toe';             // HomeLoadTV username (email-address)
-$password = 'your_password';       // HomeLoadTV password
-$directory = 'target_directory';    // Local absolute target directory for downloads
-$happyhour = true;                  // Download only when happy hour if 'true'
-$limit = 10;                        // Maximum number of downloads per call
-$emailFrom = 'sender@your.domain';  // Sender email address for error messages
-$thumbnails = true;                 // Download thumbnails
-$verbose = false;                   // Show status messages
-
-// Includes
-require_once('HomeLoadTV.php');
-
-// Code
+// Exception handling
 try {
+
+    // Include configuration and Homeload class
+    require_once('config.php');
+    require_once('HomeLoadTV.php');
+
+    // Create new HomeLoadTV object
     $hltv = new HomeLoadTV($email, $password);
+
+    // Run HomeLoadTV request/download
     $result = $hltv->download($directory, $happyhour, $limit, $emailFrom, $thumbnails, $verbose);
+
+    // Destroy HomeLoadTV object
     unset($hltv);
+
+    // Display success message
+    if (verbose) {
+	echo "\t\t\tOK!\n";
+    }
+
+    // Exit with result of download method
     exit($result);
+
 } catch (Exception $e) {
-    echo "\t\t\t!!! Caught exception: ", $e->getMessage(), "\n";
+
+    // Create error message of exception
+    $err_msg = date('Y-m-d H:i:s ') . $e->getMessage();
+
+    // Write exception to log-file
+    error_log($err_msg . "\n", 3, $directory . '/HomeLoadTV.log');
+
+    // Send email with exception message
+    if(!empty($emailFrom)) {
+	\mail($email, 'HomeLoadTV error message', $err_msg, 'From: ' . $emailFrom);
+    }
+
+    // Display exceptions in verbose mode
+    if ($verbose) {
+	echo "\t\t\t!!! Caught exception: ", $e->getMessage(), "\n";
+    }
+
+    // Exit with error return value.
     exit(99);
 }
+
 ?>
