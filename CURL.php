@@ -179,7 +179,7 @@ class CURL {
                     // Set callback function for parsing headers
                     CURLOPT_HEADERFUNCTION => array($this, 'getHeader'),
 		    // Set user agent
-		    CURLOPT_USERAGENT => 'HLTVDLM 1.0 http://gitorious.org/hltvdlm',
+		    CURLOPT_USERAGENT => 'HLTVDLM 1.0 https://github.com/renneb/HLTVDLM',
 	))) {
             throw new Exception(__FILE__ . ':' . __LINE__ . ' ' . get_class() . '::' . __FUNCTION__ . ' ' . curl_error($con));
 	    @flock($this->fd, LOCK_UN);
