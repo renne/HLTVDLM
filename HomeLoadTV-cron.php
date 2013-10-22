@@ -20,6 +20,8 @@ $directory = 'target_directory';    // Local absolute target directory for downl
 $happyhour = true;                  // Download only when happy hour if 'true'
 $limit = 10;                        // Maximum number of downloads per call
 $emailFrom = 'sender@your.domain';  // Sender email address for error messages
+$thumbnails = true;                 // Download thumbnails
+$verbose = false;                   // Show status messages
 
 // Includes
 require_once('HomeLoadTV.php');
@@ -27,12 +29,11 @@ require_once('HomeLoadTV.php');
 // Code
 try {
     $hltv = new HomeLoadTV($email, $password);
-    $hltv->download($directory, $happyhour, $limit, $emailFrom);
+    $result = $hltv->download($directory, $happyhour, $limit, $emailFrom, $thumbnails, $verbose);
     unset($hltv);
+    exit($result);
 } catch (Exception $e) {
     echo "\t\t\t!!! Caught exception: ", $e->getMessage(), "\n";
-    exit(1);
+    exit(99);
 }
-echo "OK\n";
-exit(0);
 ?>
