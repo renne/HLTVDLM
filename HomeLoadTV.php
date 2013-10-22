@@ -20,9 +20,9 @@ require_once('CURL.php');
  * @name        HomeLoadTV
  * @description Download-manager-class for HomeloadTV.
  * @author      Rene Bartsch <rene@bartschnet.de>
- * @copyright   Rene Bartsch 2012
+ * @copyright   Rene Bartsch 2013
  * @license     GNU GPL v.3
- * @link        http://gitorious.org/hltvdlm
+ * @link        https://github.com/renneb/HLTVDLM
  * @link        http://www.otrforum.com/showthread.php?62869-Api
  * @version     $Id$
  */
@@ -302,7 +302,7 @@ class HomeLoadTV {
             'do=setstate',
             'uid=' . $this->email,
             'id=' . $id,
-            'state=' . $state,	
+            'state=' . $state,
             'error=' . $error,
             'filesize=' . $filesize,
             'speed=' . $speed,

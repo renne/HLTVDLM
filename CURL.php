@@ -15,9 +15,9 @@
  * @name        CURL
  * @description Class for downloading files via HTTP.
  * @author      Rene Bartsch <rene@bartschnet.de>
- * @copyright   Rene Bartsch 2012
+ * @copyright   Rene Bartsch 2013
  * @license     GNU GPL v.3
- * @link        http://gitorious.org/hltvdlm
+ * @link        https://github.com/renneb/HLTVDLM
  * @version     $Id$
  */
 class CURL {
