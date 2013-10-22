@@ -1,4 +1,4 @@
-#!/usr/bin/php5-cli
+#!/usr/bin/env php5
 <?php
 /**
  * Example executable for cronjobs.
@@ -47,7 +47,7 @@ try {
 
     // Send email with exception message
     if(!empty($emailFrom)) {
-	\mail($email, 'HomeLoadTV error message', $err_msg, 'From: ' . $emailFrom);
+	mail($email, 'HomeLoadTV error message', $err_msg, 'From: ' . $emailFrom);
     }
 
     // Display exceptions in verbose mode
