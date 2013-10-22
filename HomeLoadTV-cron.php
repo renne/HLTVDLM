@@ -56,7 +56,9 @@ try {
     }
 
     // Exit with error return value.
-    exit(99);
+    if(0 === $e->getCode()) {
+	exit(99);
+    }
 }
 
 ?>

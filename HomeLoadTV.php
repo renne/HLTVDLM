@@ -369,9 +369,19 @@ class HomeLoadTV {
                 preg_match('#.*/\d*_?(?P<filename>(?P<name>.+_TVOON_DE)\.(?P<format>.*))#', $link['url'], $rec);
                 $filename = (isset($rec['filename'])) ? $rec['filename'] : '';
 
-                // Download link
-                if ($verbose) echo $link['url'] . "\n";
-                $video = $this->curl->downloadFile($link['url'], $directory, $filename, 0660);
+		// Exception Handling
+		try{
+		    // Download link
+		    if ($verbose) echo $link['url'] . "\n";
+		    $video = $this->curl->downloadFile($link['url'], $directory, $filename, 0660);
+		} catch (Exception $e) {
+
+		    // Throw exception for logging only
+		    throw new Exception($e->getMessage(), 1, $e);
+
+		    // Continue loop
+		    continue;
+		}
 
                 // Handle errors
                 $errors = array();
