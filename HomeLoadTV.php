@@ -377,7 +377,7 @@ class HomeLoadTV {
 		} catch (Exception $e) {
 
 		    // Call HomeloadTV-API and set state 'finished' with error message
-		    $this->setState($link['id'], 'finished', 0, 0, 'Client reported broken link');
+		    $this->setState($link['id'], 'finished', 0, 0, 'BrokenLink');
 
 		    // Throw exception for logging only
 		    throw new Exception($e->getMessage(), 1, $e);
