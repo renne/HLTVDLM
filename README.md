@@ -9,6 +9,7 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 * Account at [HomeloadTV](http://www.homeloadtv.com/)
 * PHP >= 5.3
 * PHP cURL extension
+* PHP mbstring extension
 * PHP 64-bit support for files > 2 GByte
 * Cronjob every 5 minutes
 
