@@ -15,6 +15,12 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 ##**Bugs and Feature Requests**
 https://github.com/renneb/HLTVDLM/issues
 
+##**Website**
+http://renneb.github.io/HLTVDLM
+
+##**Wiki**
+https://github.com/renneb/HLTVDLM/wiki
+
 ##**Discussion**
 [OTR-Forum](http://www.otrforum.com/showthread.php?62869-Api&p=348681#post348681) (German)
 
