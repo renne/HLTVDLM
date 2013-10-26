@@ -264,7 +264,7 @@ class HomeLoadTV {
      * Sets the state of a download link.
      *
      * @param   integer $id         ID of download link.
-     * @param   string  $state      Either "new" or "finished".
+     * @param   string  $state      Either "new", "finished" or "damaged".
      * @param   integer $filesize   Filesize in KiloByte
      * @param   integer $speed      Download speed in KiloBit/s.
      * @param   string  $error      Empty string for success, "endHH" for end of Happy Hour or any other error message. Not used with state "new"
@@ -282,7 +282,7 @@ class HomeLoadTV {
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $id must be greater than zero!');
         if (!is_string($state))
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $state must be string type!');
-        if (!((0 === strcmp($state, "new")) || (0 === strcmp($state, "finished"))))
+        if (!((0 === strcmp($state, "new")) || (0 === strcmp($state, "finished")) || (0 === strcmp($state, "damaged"))))
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $state must not be string type!');
         if (!is_integer($filesize))
             throw new Exception(get_class() . '::' . __FUNCTION__ . ': Parameter $filesize must be integer type!');
@@ -303,7 +303,7 @@ class HomeLoadTV {
             'uid=' . $this->email,
             'id=' . $id,
             'state=' . $state,
-            'error=' . $error,
+            'error=' . urlencode($error),
             'filesize=' . $filesize,
             'speed=' . $speed,
             'file=' . base64_encode($filename),
@@ -392,10 +392,16 @@ class HomeLoadTV {
                     $errors['video'] = $video;
                     print_r($video);
                 }
-                if ($verbose) echo "Downloaded: " . intval($video['size_download'] / 1024 / 1024) . "MB\n";
+                if ($verbose) echo "Downloaded: " . intval($video['size_download'] / 1024 / 1024) . "Mb with " . intval($video['speed_download'] / 1024) . "Kb/s\n";
 
                 // Call HomeloadTV-API and set state
                 $state = (0 == $video['errno']) ? 'finished' : 'new';
+
+		// HTTP 4xx client errors: state=damaged
+		if(intval($video['http_code']) >= 400 && intval($video['http_code']) <= 499) {
+		    $state='damaged';
+		}
+		
                 if ($verbose) echo "Changing state of link id " . $link['id'] . " to " . $state . "\n";
                 $this->setState($link['id'], $state, intval($video['size_download'] / 1024), intval($video['speed_download'] / 1024), $video['error'], basename($video['filepath']));
 
@@ -419,7 +425,7 @@ class HomeLoadTV {
 
                 // Send mail with error messages
                 if (!empty($errors) && !empty($emailFrom)) {
-                    mail($this->email, 'HomeLoadTV error message', implode("\n", $video), 'From: ' . $emailFrom);
+                    mail($this->email, 'HomeLoadTV error message', print_r($video, true), 'From: ' . $emailFrom);
                 }
             }
 

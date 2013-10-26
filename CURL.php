@@ -206,6 +206,11 @@ class CURL {
 		break;
 	    }
 
+	    // Handle HTTP 4xx client errors, leave download loop
+	    if(intval($result['http_code']) >= 400 && intval($result['http_code']) <= 499) {
+		break;
+	    }
+
 	    // Handle HTTP code 503 "Temporarily unavailable"
 	    if(503 === intval($result['http_code'])) {
 
