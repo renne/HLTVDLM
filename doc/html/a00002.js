@@ -2,7 +2,7 @@ var a00002 =
 [
     [ "__construct", "a00002.xhtml#aaaa2656ddeca0b10e9cfbdcf33af6171", null ],
     [ "__destruct", "a00002.xhtml#a569e9d37b9020f55f88a977f13659d8c", null ],
-    [ "download", "a00002.xhtml#a648a0cbc9ad33100e4c6a3860d1f8646", null ],
+    [ "download", "a00002.xhtml#aa069749ab87b7338f6fc6bfc64f1be57", null ],
     [ "getLinks", "a00002.xhtml#a568d46c9f41fd833874aacacf2d26e57", null ],
     [ "setProcessing", "a00002.xhtml#a5989cc319d99120c3fc57e59f42ccb11", null ],
     [ "setState", "a00002.xhtml#a036df968051a20fee7f3f633f2ff1c97", null ],

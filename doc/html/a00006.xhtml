@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>HLTVDLM: HomeLoadTV Namespace Reference</title>
+<title>HLTVDLM: HomeLoadTV-cron.php File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,9 +45,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.xhtml"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.xhtml"><span>Related&#160;Pages</span></a></li>
-      <li class="current"><a href="namespaces.xhtml"><span>Namespaces</span></a></li>
+      <li><a href="namespaces.xhtml"><span>Namespaces</span></a></li>
       <li><a href="annotated.xhtml"><span>Data&#160;Structures</span></a></li>
-      <li><a href="files.xhtml"><span>Files</span></a></li>
+      <li class="current"><a href="files.xhtml"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,7 +68,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="namespaces.xhtml"><span>Namespace&#160;List</span></a></li>
+      <li><a href="files.xhtml"><span>File&#160;List</span></a></li>
+      <li><a href="globals.xhtml"><span>Globals</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -101,35 +102,89 @@ $(document).ready(function(){initNavTree('a00006.xhtml','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">HomeLoadTV Namespace Reference</div>  </div>
+<div class="title">HomeLoadTV-cron.php File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The class <a class="el" href="a00001.xhtml">CURL</a> downloads a given HTTP-URL into given directory.</p>
-<p>The class supports</p>
-<ul>
-<li>HTTP-503-queues</li>
-<li>resuming downloads</li>
-<li>locking files while writing</li>
-<li>setting file mode (Unix-chmod-style)</li>
-<li><p class="startli">setting filename or deriving filename from URL</p>
-<p class="startli">cURL</p>
-</li>
-</ul>
-<p>Example executable for cronjobs.</p>
-<p>Download-manager-class for HomeloadTV.</p>
-<p>The class queries the HomeloadTV-API for files to download, uses the class "CURL" to download the file and marks the file as finished via the HomeloadTV-API. In case of OnlineTVRecorder-recordings a thumbnail of the recording is downloaded, too.</p>
-<p>For use with cronjobs a locking mechanism is implemented.</p>
-<p>!!! Important: Objects MUST be destroyed on exceptions or you can loose data !!!</p>
-<p><a class="el" href="a00002.xhtml">HomeLoadTV</a> </p>
-</div></div><!-- contents -->
+
+<p><a href="a00006_source.xhtml">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00010"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00010.xhtml">HomeLoadTV</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Executable</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrp38492e6b60e40c59a376e2151778e2c7"></a> Executable for class <a class="el" href="a00002.xhtml">HomeLoadTV</a>. </p>
+<dl class="section author"><dt>Author</dt><dd>Rene Bartsch <a href="#" onclick="location.href='mai'+'lto:'+'ren'+'e@'+'bar'+'ts'+'chn'+'et'+'.de'; return false;">rene@<span style="display: none;">.nosp@m.</span>bart<span style="display: none;">.nosp@m.</span>schne<span style="display: none;">.nosp@m.</span>t.de</a> </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>Rene Bartsch 2013 copyright GNU GPL v.3 <a class="el" href="">$Id$ </a></dd></dl>
+</td></tr>
+<tr class="memitem:abe4cc9788f52e49485473dc699537388"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00006.xhtml#abe4cc9788f52e49485473dc699537388">try</a></td></tr>
+<tr class="separator:abe4cc9788f52e49485473dc699537388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fa4be3b75966f66dfda7e5829ac9c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00006.xhtml#ab5fa4be3b75966f66dfda7e5829ac9c6">$hltv</a> = new <a class="el" href="a00002.xhtml">HomeLoadTV</a>($email, $password)</td></tr>
+<tr class="separator:ab5fa4be3b75966f66dfda7e5829ac9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112ef069ddc0454086e3d1e6d8d55d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00006.xhtml#a112ef069ddc0454086e3d1e6d8d55d07">$result</a> = $hltv-&gt;download($directory, $happyhour, $limit, $emailFrom, $thumbnails, $verbose)</td></tr>
+<tr class="separator:a112ef069ddc0454086e3d1e6d8d55d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="ab5fa4be3b75966f66dfda7e5829ac9c6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$hltv = new <a class="el" href="a00002.xhtml">HomeLoadTV</a>($email, $password)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="a00006_source.xhtml#l00024">24</a> of file <a class="el" href="a00006_source.xhtml">HomeLoadTV-cron.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a112ef069ddc0454086e3d1e6d8d55d07"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$result = $hltv-&gt;download($directory, $happyhour, $limit, $emailFrom, $thumbnails, $verbose)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="a00006_source.xhtml#l00027">27</a> of file <a class="el" href="a00006_source.xhtml">HomeLoadTV-cron.php</a>.</p>
+
+<p>Referenced by <a class="el" href="a00005_source.xhtml#l00111">CURL\downloadFile()</a>, <a class="el" href="a00008_source.xhtml#l00091">HomeLoadTvApi\getLinks()</a>, and <a class="el" href="a00007_source.xhtml#l00174">HomeLoadTV\getLinks()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abe4cc9788f52e49485473dc699537388"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">try</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line"></div>
+<div class="line">    </div>
+<div class="line">    require_once(<span class="stringliteral">&#39;config.php&#39;</span>)</div>
+</div><!-- fragment -->
+<p>Definition at line <a class="el" href="a00006_source.xhtml#l00017">17</a> of file <a class="el" href="a00006_source.xhtml">HomeLoadTV-cron.php</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="a00006.xhtml">HomeLoadTV</a></li>
-    <li class="footer">Generated on Wed Aug 14 2013 16:03:41 for HLTVDLM by
+    <li class="navelem"><a class="el" href="a00006.xhtml">HomeLoadTV-cron.php</a></li>
+    <li class="footer">Generated on Sat Oct 26 2013 19:38:29 for HLTVDLM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

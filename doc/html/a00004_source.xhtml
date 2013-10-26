@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>HLTVDLM: HomeLoadTV-cron.php Source File</title>
+<title>HLTVDLM: config-example.php Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,41 +103,42 @@ $(document).ready(function(){initNavTree('a00004_source.xhtml','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">HomeLoadTV-cron.php</div>  </div>
+<div class="title">config-example.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00004.xhtml">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#!/usr/bin/php5-cli</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span>&lt;?php</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// Configuration</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="a00004.xhtml#ad634f418b20382e2802f80532d76d3cd">   17</a></span>&#160;<a class="code" href="a00004.xhtml#ad634f418b20382e2802f80532d76d3cd">$email</a> = <span class="stringliteral">&#39;tic@tac.toe&#39;</span>;             <span class="comment">// HomeLoadTV username (email-address)</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="a00004.xhtml#a607686ef9f99ea7c42f4f3dd3dbb2b0d">   18</a></span>&#160;<a class="code" href="a00004.xhtml#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a> = <span class="stringliteral">&#39;your_password&#39;</span>;       <span class="comment">// HomeLoadTV password</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">   19</a></span>&#160;<a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">$directory</a> = <span class="stringliteral">&#39;target_directory&#39;</span>;    <span class="comment">// Local absolute target directory for downloads</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="a00004.xhtml#a10fe49037e9e780930da0c20144c55b8">   20</a></span>&#160;<a class="code" href="a00004.xhtml#a10fe49037e9e780930da0c20144c55b8">$happyhour</a> = <span class="keyword">true</span>;                  <span class="comment">// Download only when happy hour if &#39;true&#39;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="a00004.xhtml#ae05862a0294251c88629b141b5ce329a">   21</a></span>&#160;<a class="code" href="a00004.xhtml#ae05862a0294251c88629b141b5ce329a">$limit</a> = 10;                        <span class="comment">// Maximum number of downloads per call</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="code" href="a00004.xhtml#a8812e953c70aa15f8f01e0a83230e645">   22</a></span>&#160;<a class="code" href="a00004.xhtml#a8812e953c70aa15f8f01e0a83230e645">$emailFrom</a> = <span class="stringliteral">&#39;sender@your.domain&#39;</span>;  <span class="comment">// Sender email address for error messages</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// Includes</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;require_once(<span class="stringliteral">&#39;HomeLoadTV.php&#39;</span>);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// Code</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="a00004.xhtml#abe4cc9788f52e49485473dc699537388">   28</a></span>&#160;<span class="keywordflow">try</span> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    $hltv = <span class="keyword">new</span> <a class="code" href="a00002.xhtml">HomeLoadTV</a>(<a class="code" href="a00004.xhtml#ad634f418b20382e2802f80532d76d3cd">$email</a>, <a class="code" href="a00004.xhtml#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a>);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    $hltv-&gt;download(<a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">$directory</a>, <a class="code" href="a00004.xhtml#a10fe49037e9e780930da0c20144c55b8">$happyhour</a>, <a class="code" href="a00004.xhtml#ae05862a0294251c88629b141b5ce329a">$limit</a>, <a class="code" href="a00004.xhtml#a8812e953c70aa15f8f01e0a83230e645">$emailFrom</a>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    unset($hltv);</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="a00004.xhtml#a9ee42195f2b26ca51b7b816b4f28113e">   32</a></span>&#160;} <span class="keywordflow">catch</span> (Exception $e) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    echo <span class="stringliteral">&quot;\t\t\t!!! Caught exception: &quot;</span>, $e-&gt;getMessage(), <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    exit(1);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;echo <span class="stringliteral">&quot;OK\n&quot;</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;exit(0);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;?&gt;</div>
+<a href="a00004.xhtml">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// HomeLoadTV username (email-address)</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="a00004.xhtml#ad634f418b20382e2802f80532d76d3cd">   18</a></span>&#160;<a class="code" href="a00004.xhtml#ad634f418b20382e2802f80532d76d3cd">$email</a> = <span class="stringliteral">&#39;tic@tac.toe&#39;</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// HomeLoadTV password</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="a00004.xhtml#a607686ef9f99ea7c42f4f3dd3dbb2b0d">   21</a></span>&#160;<a class="code" href="a00004.xhtml#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a> = <span class="stringliteral">&#39;your_homeloadtv_password&#39;</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// Local absolute target directory for downloads and log-files</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">   24</a></span>&#160;<a class="code" href="a00004.xhtml#a1b07c630eb02f770a082a013373a16d6">$directory</a> = <span class="stringliteral">&#39;target_directory&#39;</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Download only when happy hour is &#39;true&#39;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="a00004.xhtml#a10fe49037e9e780930da0c20144c55b8">   27</a></span>&#160;<a class="code" href="a00004.xhtml#a10fe49037e9e780930da0c20144c55b8">$happyhour</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Maximum number of downloads per call</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="a00004.xhtml#ae05862a0294251c88629b141b5ce329a">   30</a></span>&#160;<a class="code" href="a00004.xhtml#ae05862a0294251c88629b141b5ce329a">$limit</a> = 100;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Sender email address for error messages</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="code" href="a00004.xhtml#a8812e953c70aa15f8f01e0a83230e645">   33</a></span>&#160;<a class="code" href="a00004.xhtml#a8812e953c70aa15f8f01e0a83230e645">$emailFrom</a> = <span class="stringliteral">&#39;sender@your.domain&#39;</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Download thumbnails</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="a00004.xhtml#a65ef202f6896185470480b1f85e62eaa">   36</a></span>&#160;<a class="code" href="a00004.xhtml#a65ef202f6896185470480b1f85e62eaa">$thumbnails</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// Show status messages</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="a00004.xhtml#a465cd15e121083ca0745bc9c1186cbda">   39</a></span>&#160;<a class="code" href="a00004.xhtml#a465cd15e121083ca0745bc9c1186cbda">$verbose</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;?&gt;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="a00004.xhtml">HomeLoadTV-cron.php</a></li>
-    <li class="footer">Generated on Wed Aug 14 2013 16:03:41 for HLTVDLM by
+    <li class="navelem"><a class="el" href="a00004.xhtml">config-example.php</a></li>
+    <li class="footer">Generated on Sat Oct 26 2013 19:38:29 for HLTVDLM by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
