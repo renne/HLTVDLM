@@ -1,38 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Hltvdlm : HomeloadTV-download-manager written in PHP" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Hltvdlm by renne</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Hltvdlm</title>
   </head>
-
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/renneb/HLTVDLM">View on GitHub</a>
+      <header>
+        <h1>Hltvdlm</h1>
+        <p>HomeloadTV-download-manager written in PHP</p>
+      </header>
 
-          <h1 id="project_title">Hltvdlm</h1>
-          <h2 id="project_tagline">HomeloadTV-download-manager written in PHP</h2>
+      <div id="banner">
+        <span id="logo"></span>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/renneb/HLTVDLM/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/renneb/HLTVDLM/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <a href="https://github.com/renne/HLTVDLM" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/renne/HLTVDLM/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/renne/HLTVDLM/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
         <h1>
-<a name="hltvdlm-" class="anchor" href="#hltvdlm-"><span class="octicon octicon-link"></span></a>HLTVDLM <a href="https://flattr.com/submit/auto?user_id=renne&amp;url=http://renneb.github.io/HLTVDLM&amp;title=HLTVDLM&amp;language=PHP&amp;tags=github&amp;category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%" align="right"></a>
+<a name="hltvdlm-" class="anchor" href="#hltvdlm-"><span class="octicon octicon-link"></span></a>HLTVDLM <a href="https://flattr.com/submit/auto?user_id=renne&amp;url=http://renne.github.io/HLTVDLM&amp;title=HLTVDLM&amp;language=PHP&amp;tags=github&amp;category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%" align="right"></a>
 </h1>
 
 <p><b>HLTVDLM</b> is a download-manager for <a href="http://www.homeloadtv.com/" alt="HomeloadTV"><i>HomeloadTV</i></a> written in <b>PHP</b> to be used on systems which cannot run the official <i>HomeloadTV</i>-client.
@@ -48,25 +56,26 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 </li>
 <li>PHP &gt;= 5.3</li>
 <li>PHP cURL extension</li>
+<li>PHP mbstring extension</li>
 <li>PHP 64-bit support for files &gt; 2 GByte</li>
 <li>Cronjob every 5 minutes</li>
 </ul><h2>
 <a name="bugs-and-feature-requests" class="anchor" href="#bugs-and-feature-requests"><span class="octicon octicon-link"></span></a><strong>Bugs and Feature Requests</strong>
 </h2>
 
-<p><a href="https://github.com/renneb/HLTVDLM/issues">https://github.com/renneb/HLTVDLM/issues</a></p>
+<p><a href="https://github.com/renne/HLTVDLM/issues">https://github.com/renne/HLTVDLM/issues</a></p>
 
 <h2>
 <a name="website" class="anchor" href="#website"><span class="octicon octicon-link"></span></a><strong>Website</strong>
 </h2>
 
-<p><a href="http://renneb.github.io/HLTVDLM">http://renneb.github.io/HLTVDLM</a></p>
+<p><a href="http://renne.github.io/HLTVDLM">http://renne.github.io/HLTVDLM</a></p>
 
 <h2>
 <a name="wiki" class="anchor" href="#wiki"><span class="octicon octicon-link"></span></a><strong>Wiki</strong>
 </h2>
 
-<p><a href="https://github.com/renneb/HLTVDLM/wiki">https://github.com/renneb/HLTVDLM/wiki</a></p>
+<p><a href="https://github.com/renne/HLTVDLM/wiki">https://github.com/renne/HLTVDLM/wiki</a></p>
 
 <h2>
 <a name="discussion" class="anchor" href="#discussion"><span class="octicon octicon-link"></span></a><strong>Discussion</strong>
@@ -105,17 +114,12 @@ It can be used to e.g. download files into a private area on a shared-hosting we
 
 <p>Included in docs-directory of repository (Doxygen-XHTML)</p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Hltvdlm maintained by <a href="https://github.com/renneb">renneb</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/renne">renne</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>
