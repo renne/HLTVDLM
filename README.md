@@ -1,4 +1,4 @@
-HLTVDLM <a href="https://flattr.com/submit/auto?user_id=renne&url=http://renne.github.io/HLTVDLM&title=HLTVDLM&language=PHP&tags=github&category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" height="24em" width="16%" align="right"/></a>
+HLTVDLM [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=renne&url=https://github.com/renne/HLTVDLM&title= HLTVDLM&language=PHP&tags=github&category=software)
 =======
 
 <b>HLTVDLM</b> is a download-manager for <a href="http://www.homeloadtv.com/" alt="HomeloadTV"><i>HomeloadTV</i></a> written in <b>PHP</b> to be used on systems which cannot run the official <i>HomeloadTV</i>-client.
